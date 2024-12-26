@@ -24,14 +24,25 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Quiz functionality (only execute if on quiz page)
-    if (document.getElementById("quiz-section")) {
-        const examples = [
-            { text: "Your account has been compromised. Please click here to reset your password.", isPhishing: true },
-            { text: "Your package has been shipped. Track it here: www.trustedshop.com.", isPhishing: false },
-            { text: "We've noticed suspicious activity on your account. Please verify your details immediately.", isPhishing: true },
-            { text: "Welcome to our newsletter! Click here to confirm your subscription: www.newsletter.com.", isPhishing: false }
-        ];
+   // Quiz functionality (only execute if on quiz page)
+if (document.getElementById("quiz-section")) {
+    const examples = [
+        { text: "Your account has been compromised. Please click here to reset your password.", isPhishing: true },
+        { text: "Your package has been shipped. Track it here: www.trustedshop.com.", isPhishing: false },
+        { text: "We've noticed suspicious activity on your account. Please verify your details immediately.", isPhishing: true },
+        { text: "Welcome to our newsletter! Click here to confirm your subscription: www.newsletter.com.", isPhishing: false },
+        { text: "Congratulations! You've won a free iPhone. Click here to claim your prize: www.free-iphone-giveaway.com", isPhishing: true },
+        { text: "Your credit card payment is due. Log in to your account at www.yourbank.com to make a payment.", isPhishing: false },
+        { text: "URGENT: Your tax refund is ready. Provide your bank details here: www.irs-refund.net", isPhishing: true },
+        { text: "Your order #1234 has been processed. View your receipt at www.amazon.com/orders", isPhishing: false },
+        { text: "Security Alert: Unusual login attempt detected. Verify your identity now: www.google-security.net", isPhishing: true },
+        { text: "Your flight reservation is confirmed. Check in online at www.delta.com", isPhishing: false },
+        { text: "Your Netflix subscription has expired. Update your payment info here: www.netflix-renewal.com", isPhishing: true },
+        { text: "Thank you for your purchase. Leave a review for a 10% discount on your next order at www.etsy.com", isPhishing: false },
+        { text: "Your social security number has been suspended due to suspicious activity. Call this number immediately: 1-800-555-1234", isPhishing: true },
+        { text: "Your password will expire in 3 days. Change it now at portal.yourcompany.com", isPhishing: false },
+        { text: "You have (1) new voicemail. Listen now: www.voicemail-service.net", isPhishing: true }
+    ];
 
         let score = 0;
         const totalQuestions = examples.length;
@@ -47,12 +58,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const emailExampleElement = document.getElementById("email-example");
         const timerElement = document.getElementById("timer");
 
-        const explanations = [
-            "Phishing emails often create a sense of urgency, such as claiming your account has been compromised. Always verify the source before clicking links.",
-            "Legitimate emails from stores or shipping companies will often include tracking information that matches your actual order. Look for familiar domains.",
-            "Phishing emails will ask for immediate action, like resetting your password, often with a suspicious link.",
-            "Legitimate newsletters usually include clear unsubscribe links and come from recognized sources."
-        ];
+   const explanations = [
+    "Phishing emails often create a sense of urgency, such as claiming your account has been compromised. Always verify the source before clicking links. If you receive such an email, it's best to directly visit the company's official website or contact their customer support through a trusted channel.",
+    "Legitimate emails from stores or shipping companies will often include tracking information that matches your actual order. Look for familiar domains. However, if you haven't made a recent purchase, be cautious of unexpected shipping notifications as they could be phishing attempts.",
+    "Phishing emails will ask for immediate action, like resetting your password, often with a suspicious link. Instead of clicking the link, go directly to the official website and check your account status there. Legitimate companies rarely ask you to reset your password via email unless you've requested it.",
+    "Legitimate newsletters usually include clear unsubscribe links and come from recognized sources. Before confirming any subscription, ensure you've actually signed up for it. Be wary of unexpected newsletter confirmations, as they could be attempts to verify active email addresses.",
+    "While this offer seems tempting, it's likely a scam. Legitimate companies rarely give away expensive items for free. Always be skeptical of 'too good to be true' offers, especially when they require you to click on links or provide personal information.",
+    "For online banking, it's generally safer to use the bank's official mobile app or website. If you're making a payment, ensure you've signed up for email or push notifications to track your transactions. Avoid conducting sensitive financial operations on public Wi-Fi networks, as they can be insecure.",
+    "Google and other reputable companies will never ask you to verify your identity through a link in an email. If you receive such a request, log in to your account directly through the official website or app to check for any security notifications. Always be cautious of emails claiming security issues.",
+    "Legitimate flight confirmations will come from the airline's official email address and typically include your booking reference. If you haven't booked a flight recently, this could be a phishing attempt. Always verify unexpected travel confirmations directly with the airline through their official website or customer service line.",
+    "Netflix and other subscription services will typically direct you to their official website to update payment information. Be wary of any emails asking you to click on links to update your payment details. Instead, log in to your account directly through the official website or app to manage your subscription.",
+    "While legitimate businesses often request reviews, be cautious of emails offering discounts for reviews, especially if they ask you to click on unfamiliar links. If you've recently made a purchase and receive such an offer, verify it by logging into your account on the official website before proceeding."
+];
+
 
         function startTimer() {
             timeLeft = 10;
