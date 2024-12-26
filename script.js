@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const phishingButton = document.getElementById("phishing-btn");
     const legitimateButton = document.getElementById("legitimate-btn");
     const nextButton = document.getElementById("next-btn"); // New button for next question
+    const startButton = document.getElementById("start-btn"); // Start quiz button
     const feedback = document.getElementById("feedback");
     const emailExampleElement = document.getElementById("email-example");
 
@@ -85,17 +86,26 @@ document.addEventListener("DOMContentLoaded", () => {
     // Event listeners for the answer buttons
     phishingButton.addEventListener("click", () => {
         stopTimer();
-        handleResponse(true);
-        startTimer();
+        handleResponse(true); // Handle phishing answer
+        startTimer(); // Restart the timer
     });
 
     legitimateButton.addEventListener("click", () => {
         stopTimer();
-        handleResponse(false);
-        startTimer();
+        handleResponse(false); // Handle legitimate answer
+        startTimer(); // Restart the timer
     });
 
-    // Initialize the quiz and start the timer
-    updateExample();
-    startTimer();
+    // Event listener for the Start Quiz button
+    startButton.addEventListener("click", () => {
+        // Hide the Start button and show the quiz
+        document.getElementById("quiz-start-section").style.display = "none";
+        document.getElementById("quiz-section").style.display = "block";
+        updateExample(); // Initialize the first question
+        startTimer(); // Start the timer
+    });
+
+    // Initialize the quiz page with the Start button
+    document.getElementById("quiz-start-section").style.display = "block";
+    document.getElementById("quiz-section").style.display = "none";
 });
