@@ -20,6 +20,93 @@ document.addEventListener("DOMContentLoaded", () => {
             isPhishing: false 
         }
     ];
+    
+    let score = 0;
+const totalQuestions = examples.length;
+
+function handleResponse(isPhishing) {
+    const example = examples[currentExampleIndex];
+    if (example.isPhishing === isPhishing) {
+        feedback.textContent = "Correct! " + (isPhishing ? "This is a phishing email." : "This email is legitimate.");
+        feedback.style.color = "green";
+        score++;
+    } else {
+        feedback.textContent = "Incorrect. " + (isPhishing ? "This email is legitimate." : "This is a phishing email.");
+        feedback.style.color = "red";
+    }
+
+    // Move to the next example after a short delay
+    setTimeout(() => {
+        currentExampleIndex = (currentExampleIndex + 1) % examples.length; // Loop back to the start
+        updateExample();
+
+        // If all questions are answered, show score
+        if (currentExampleIndex === 0) {
+            setTimeout(() => {
+                feedback.textContent = `Your score: ${score} / ${totalQuestions}`;
+                feedback.style.color = "blue";
+            }, 2000); // Show score after delay
+        }
+    }, 2000); // 2-second delay
+}
+    let timer;
+let timeLeft = 10; // 10 seconds per question
+
+function startTimer() {
+    timer = setInterval(() => {
+        timeLeft--;
+        feedback.textContent = `Time left: ${timeLeft}s`;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            feedback.textContent = "Time's up!";
+            // Move to the next question automatically after time is up
+            currentExampleIndex = (currentExampleIndex + 1) % examples.length;
+            updateExample();
+            timeLeft = 10; // Reset timer for next question
+        }
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timer);
+    timeLeft = 10; // Reset timer
+}
+
+phishingButton.addEventListener("click", () => {
+    stopTimer();
+    handleResponse(true);
+    startTimer();
+});
+legitimateButton.addEventListener("click", () => {
+    stopTimer();
+    handleResponse(false);
+    startTimer();
+});
+
+// Start the timer when the quiz starts
+startTimer();
+
+const explanations = [
+    "Phishing emails often create a sense of urgency, such as claiming your account has been compromised. Always verify the source before clicking links.",
+    "Legitimate emails from stores or shipping companies will often include tracking information that matches your actual order. Look for familiar domains.",
+    "Phishing emails will ask for immediate action, like resetting your password, often with a suspicious link.",
+    "Legitimate newsletters usually include clear unsubscribe links and come from recognized sources."
+];
+
+function handleResponse(isPhishing) {
+    const example = examples[currentExampleIndex];
+    if (example.isPhishing === isPhishing) {
+        feedback.textContent = "Correct! " + explanations[currentExampleIndex];
+        feedback.style.color = "green";
+        score++;
+    } else {
+        feedback.textContent = "Incorrect. " + explanations[currentExampleIndex];
+        feedback.style.color = "red";
+    }
+    // Move to next example...
+}
+
+
 
     let currentExampleIndex = 0; // Tracks the current example
     const phishingButton = document.getElementById("phishing-btn");
