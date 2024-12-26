@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const phishingButton = document.getElementById("phishing-btn");
     const legitimateButton = document.getElementById("legitimate-btn");
+    const nextButton = document.getElementById("next-btn"); // New button for next question
     const feedback = document.getElementById("feedback");
     const emailExampleElement = document.getElementById("email-example");
 
@@ -36,10 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (timeLeft <= 0) {
                 clearInterval(timer);
                 feedback.textContent = "Time's up!";
-                // Move to the next question automatically after time is up
-                currentExampleIndex = (currentExampleIndex + 1) % examples.length;
-                updateExample();
-                timeLeft = 10; // Reset timer for next question
+                handleResponse(false); // Automatically mark it incorrect when time runs out
             }
         }, 1000);
     }
@@ -55,13 +53,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const example = examples[currentExampleIndex];
         emailExampleElement.innerHTML = `<p>${example.text}</p>`;
         feedback.textContent = ""; // Clear feedback on load
+        nextButton.style.display = "none"; // Hide next button until after an answer or time runs out
     }
 
     // Handle user response and move to next question
     function handleResponse(isPhishing) {
         const example = examples[currentExampleIndex];
 
-        // Check if the response is correct
+        // Show explanation based on the answer or time-out
         if (example.isPhishing === isPhishing) {
             feedback.textContent = "Correct! " + explanations[currentExampleIndex];
             feedback.style.color = "green";
@@ -71,27 +70,24 @@ document.addEventListener("DOMContentLoaded", () => {
             feedback.style.color = "red";
         }
 
-        // Move to the next example after a short delay
-        setTimeout(() => {
-            currentExampleIndex = (currentExampleIndex + 1) % examples.length; // Loop back to the start
-            updateExample();
-
-            // If all questions are answered, show score
-            if (currentExampleIndex === 0) {
-                setTimeout(() => {
-                    feedback.textContent = `Your score: ${score} / ${totalQuestions}`;
-                    feedback.style.color = "blue";
-                }, 2000); // Show score after delay
-            }
-        }, 2000); // 2-second delay
+        // Display the "Next Question" button after feedback
+        nextButton.style.display = "block";
     }
 
-    // Event listeners for the buttons
+    // Event listener for "Next Question" button
+    nextButton.addEventListener("click", () => {
+        currentExampleIndex = (currentExampleIndex + 1) % examples.length; // Move to next example
+        updateExample();
+        startTimer(); // Restart the timer for the next question
+    });
+
+    // Event listeners for the answer buttons
     phishingButton.addEventListener("click", () => {
         stopTimer();
         handleResponse(true);
         startTimer();
     });
+
     legitimateButton.addEventListener("click", () => {
         stopTimer();
         handleResponse(false);
