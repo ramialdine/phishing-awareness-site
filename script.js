@@ -1,7 +1,6 @@
 console.log("Welcome to Phishing Awareness!");
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Quiz examples
     const examples = [
         { text: "Your account has been compromised. Please click here to reset your password.", isPhishing: true },
         { text: "Your package has been shipped. Track it here: www.trustedshop.com.", isPhishing: false },
@@ -31,20 +30,21 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     function startTimer() {
-        timeLeft = 10;
+        timeLeft = 10; // Reset time left to 10 seconds
+        timerElement.textContent = `Time left: ${timeLeft}s`; // Display initial time
+        stopTimer(); // Clear any existing timers to avoid multiple intervals
         timer = setInterval(() => {
             timeLeft--;
             timerElement.textContent = `Time left: ${timeLeft}s`;
             if (timeLeft <= 0) {
                 clearInterval(timer);
-                timerElement.textContent = "Time's up!";
-                handleResponse(null);
+                handleResponse(null); // Handle timeout response
             }
-        }, 1000);
+        }, 1000); // Set interval to 1000 milliseconds (1 second)
     }
 
     function stopTimer() {
-        clearInterval(timer);
+        clearInterval(timer); // Stop any existing timer
     }
 
     function updateExample() {
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         nextButton.style.display = "none";
         phishingButton.disabled = false;
         legitimateButton.disabled = false;
-        timerElement.textContent = "Time left: 10s";
+        timerElement.textContent = "Time left: 10s"; // Reset displayed time
     }
 
     function handleResponse(isPhishing) {
@@ -79,13 +79,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     nextButton.addEventListener("click", () => {
-        currentExampleIndex = (currentExampleIndex + 1) % examples.length;
-        if (currentExampleIndex === 0) {
+        currentExampleIndex++;
+        if (currentExampleIndex >= examples.length) {
             endQuiz();
-        } else {
-            updateExample();
-            startTimer();
+            return;
         }
+        
+        updateExample();
+        startTimer();
     });
 
     phishingButton.addEventListener("click", () => handleResponse(true));
@@ -107,13 +108,16 @@ document.addEventListener("DOMContentLoaded", () => {
             <p>Your score: ${score} out of ${totalQuestions}</p>
             <button id="restart-btn">Restart Quiz</button>
         `;
+        
         document.getElementById("restart-btn").addEventListener("click", restartQuiz);
     }
 
     function restartQuiz() {
         score = 0;
         currentExampleIndex = 0;
+        
         document.getElementById("result-section").style.display = "none";
+        
         document.getElementById("quiz-start-section").style.display = "block";
     }
 
