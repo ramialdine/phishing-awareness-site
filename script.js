@@ -11,18 +11,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let score = 0;
     const totalQuestions = examples.length;
-    let currentExampleIndex = 0; // Tracks the current example
-    let timeLeft = 10; // 10 seconds per question
+    let currentExampleIndex = 0;
+    let timeLeft = 10;
     let timer;
 
     const phishingButton = document.getElementById("phishing-btn");
     const legitimateButton = document.getElementById("legitimate-btn");
-    const nextButton = document.getElementById("next-btn"); // New button for next question
-    const startButton = document.getElementById("start-btn"); // Start quiz button
+    const nextButton = document.getElementById("next-btn");
+    const startButton = document.getElementById("start-btn");
     const feedback = document.getElementById("feedback");
     const emailExampleElement = document.getElementById("email-example");
+    const timerElement = document.getElementById("timer");
 
-    // Explanations for each example
     const explanations = [
         "Phishing emails often create a sense of urgency, such as claiming your account has been compromised. Always verify the source before clicking links.",
         "Legitimate emails from stores or shipping companies will often include tracking information that matches your actual order. Look for familiar domains.",
@@ -30,39 +30,43 @@ document.addEventListener("DOMContentLoaded", () => {
         "Legitimate newsletters usually include clear unsubscribe links and come from recognized sources."
     ];
 
-    // Start timer when the quiz starts
     function startTimer() {
+        timeLeft = 10;
         timer = setInterval(() => {
             timeLeft--;
-            feedback.textContent = `Time left: ${timeLeft}s`;
+            timerElement.textContent = `Time left: ${timeLeft}s`;
             if (timeLeft <= 0) {
                 clearInterval(timer);
-                feedback.textContent = "Time's up!";
-                handleResponse(false); // Automatically mark it incorrect when time runs out
+                timerElement.textContent = "Time's up!";
+                handleResponse(null);
             }
         }, 1000);
     }
 
-    // Stop the timer
     function stopTimer() {
         clearInterval(timer);
-        timeLeft = 10; // Reset timer
     }
 
-    // Function to update the displayed example
     function updateExample() {
         const example = examples[currentExampleIndex];
-        emailExampleElement.innerHTML = `<p>${example.text}</p>`;
-        feedback.textContent = ""; // Clear feedback on load
-        nextButton.style.display = "none"; // Hide next button until after an answer or time runs out
+        emailExampleElement.textContent = example.text;
+        feedback.textContent = "";
+        nextButton.style.display = "none";
+        phishingButton.disabled = false;
+        legitimateButton.disabled = false;
+        timerElement.textContent = "Time left: 10s";
     }
 
-    // Handle user response and move to next question
     function handleResponse(isPhishing) {
+        stopTimer();
         const example = examples[currentExampleIndex];
+        phishingButton.disabled = true;
+        legitimateButton.disabled = true;
 
-        // Show explanation based on the answer or time-out
-        if (example.isPhishing === isPhishing) {
+        if (isPhishing === null) {
+            feedback.textContent = "Time's up! " + explanations[currentExampleIndex];
+            feedback.style.color = "orange";
+        } else if (example.isPhishing === isPhishing) {
             feedback.textContent = "Correct! " + explanations[currentExampleIndex];
             feedback.style.color = "green";
             score++;
@@ -71,41 +75,50 @@ document.addEventListener("DOMContentLoaded", () => {
             feedback.style.color = "red";
         }
 
-        // Display the "Next Question" button after feedback
         nextButton.style.display = "block";
     }
 
-    // Event listener for "Next Question" button
     nextButton.addEventListener("click", () => {
-        // Increment the index and wrap around if we reach the end of the examples
         currentExampleIndex = (currentExampleIndex + 1) % examples.length;
-        updateExample();
-        startTimer(); // Restart the timer for the next question
+        if (currentExampleIndex === 0) {
+            endQuiz();
+        } else {
+            updateExample();
+            startTimer();
+        }
     });
 
-    // Event listeners for the answer buttons
-    phishingButton.addEventListener("click", () => {
-        stopTimer();
-        handleResponse(true); // Handle phishing answer
-        startTimer(); // Restart the timer
-    });
+    phishingButton.addEventListener("click", () => handleResponse(true));
+    legitimateButton.addEventListener("click", () => handleResponse(false));
 
-    legitimateButton.addEventListener("click", () => {
-        stopTimer();
-        handleResponse(false); // Handle legitimate answer
-        startTimer(); // Restart the timer
-    });
-
-    // Event listener for the Start Quiz button
     startButton.addEventListener("click", () => {
-        // Hide the Start button and show the quiz
         document.getElementById("quiz-start-section").style.display = "none";
         document.getElementById("quiz-section").style.display = "block";
-        updateExample(); // Initialize the first question
-        startTimer(); // Start the timer
+        updateExample();
+        startTimer();
     });
 
-    // Initialize the quiz page with the Start button
+    function endQuiz() {
+        document.getElementById("quiz-section").style.display = "none";
+        const resultSection = document.getElementById("result-section");
+        resultSection.style.display = "block";
+        resultSection.innerHTML = `
+            <h2>Quiz Completed!</h2>
+            <p>Your score: ${score} out of ${totalQuestions}</p>
+            <button id="restart-btn">Restart Quiz</button>
+        `;
+        document.getElementById("restart-btn").addEventListener("click", restartQuiz);
+    }
+
+    function restartQuiz() {
+        score = 0;
+        currentExampleIndex = 0;
+        document.getElementById("result-section").style.display = "none";
+        document.getElementById("quiz-start-section").style.display = "block";
+    }
+
+    // Initialize the quiz page
     document.getElementById("quiz-start-section").style.display = "block";
     document.getElementById("quiz-section").style.display = "none";
+    document.getElementById("result-section").style.display = "none";
 });
