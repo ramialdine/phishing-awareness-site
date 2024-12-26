@@ -15,16 +15,22 @@
         </nav>
     </header>
     <main>
-        <section id="quiz">
+        <section id="quiz-start-section">
             <h2>Phishing Quiz</h2>
             <p>Test your knowledge by identifying phishing attempts.</p>
-            <div>
-                <p id="email-example"></p>
-                <button id="phishing-btn">Phishing</button>
-                <button id="legitimate-btn">Legitimate</button>
-            </div>
+            <button id="start-btn">Start Quiz</button>
+        </section>
+        <section id="quiz-section" style="display: none;">
+            <h2>Phishing Quiz</h2>
+            <div id="timer">Time left: 10s</div>
+            <p id="email-example"></p>
+            <button id="phishing-btn">Phishing</button>
+            <button id="legitimate-btn">Legitimate</button>
             <div id="feedback"></div>
             <button id="next-btn" style="display: none;">Next Question</button>
+        </section>
+        <section id="result-section" style="display: none;">
+            <!-- Results will be inserted here dynamically -->
         </section>
     </main>
     <script src="script.js"></script>
