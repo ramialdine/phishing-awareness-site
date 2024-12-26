@@ -69,6 +69,11 @@ if (document.getElementById("quiz-section")) {
     "Legitimate flight confirmations will come from the airline's official email address and typically include your booking reference. If you haven't booked a flight recently, this could be a phishing attempt. Always verify unexpected travel confirmations directly with the airline through their official website or customer service line.",
     "Netflix and other subscription services will typically direct you to their official website to update payment information. Be wary of any emails asking you to click on links to update your payment details. Instead, log in to your account directly through the official website or app to manage your subscription.",
     "While legitimate businesses often request reviews, be cautious of emails offering discounts for reviews, especially if they ask you to click on unfamiliar links. If you've recently made a purchase and receive such an offer, verify it by logging into your account on the official website before proceeding."
+    "This is a classic phishing attempt. Government agencies like the IRS never request bank details via email or unsecured websites. Always access government services through their official .gov websites.",
+    "This appears to be a legitimate order confirmation. Amazon and other reputable e-commerce sites use their official domains for order-related communications. However, always be cautious and verify the sender's email address.",
+    "This is a phishing attempt. Google and other tech companies never use third-party domains for security alerts. Always access your account settings directly through the official website or app to check for security issues.",
+    "This looks like a legitimate flight confirmation. However, always double-check that the airline's domain is correct and that you've actually booked a flight. If in doubt, log in to your account on the airline's official website or contact their customer service.",
+    "This is a phishing attempt. Netflix and other subscription services will never ask you to update payment information through a third-party website. Always manage your account directly through the official Netflix website or app."
 ];
 
 
