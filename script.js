@@ -76,7 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Event listener for "Next Question" button
     nextButton.addEventListener("click", () => {
-        currentExampleIndex = (currentExampleIndex + 1) % examples.length; // Move to next example
+        // Increment the index and wrap around if we reach the end of the examples
+        currentExampleIndex = (currentExampleIndex + 1) % examples.length;
         updateExample();
         startTimer(); // Restart the timer for the next question
     });
