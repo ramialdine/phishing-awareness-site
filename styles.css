@@ -15,7 +15,7 @@ header {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-h1 {
+header h1 {
     margin: 0;
     font-size: 2.5em;
     font-weight: 300;
@@ -124,18 +124,13 @@ button:hover {
     font-size: 1.2em;
 }
 
-/* Fade-in animation */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
 }
-
-section {
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-section.visible {
-    opacity: 1;
-}
-
