@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-   // Quiz functionality (only execute if on quiz page)
+    // Quiz functionality (only execute if on quiz page)
+       // Quiz functionality (only execute if on quiz page)
 if (document.getElementById("quiz-section")) {
     const examples = [
         { text: "Your account has been compromised. Please click here to reset your password.", isPhishing: true },
@@ -172,5 +173,37 @@ if (document.getElementById("quiz-section")) {
         document.getElementById("quiz-start-section").style.display = "block";
         document.getElementById("quiz-section").style.display = "none";
         document.getElementById("result-section").style.display = "none";
+    }
+});
+
+    // Phishing Email Builder functionality (only execute if on builder page)
+    if (document.getElementById("email-builder")) {
+        console.log("Email Builder loaded!");
+
+        const form = document.getElementById("builder-form");
+        const generateBtn = document.getElementById("generate-btn");
+        const generatedEmail = document.getElementById("generated-email");
+
+        generateBtn.addEventListener("click", () => {
+            const sender = document.getElementById("sender").value;
+            const email = document.getElementById("email").value;
+            const subject = document.getElementById("subject").value;
+            const content = document.getElementById("content").value;
+            const link = document.getElementById("link").value;
+
+            if (!sender || !email || !content || !link) {
+                alert("Please fill out all fields!");
+                return;
+            }
+
+            const emailHtml = `
+                <p><strong>From:</strong> ${sender} <em>&lt;${email}&gt;</em></p>
+                <p><strong>Subject:</strong> ${subject}</p>
+                <p>${content}</p>
+                <p><a href="${link}" target="_blank">Click here</a></p>
+            `;
+
+            generatedEmail.innerHTML = emailHtml;
+        });
     }
 });
