@@ -6,7 +6,7 @@ body {
     color: #333;
     background-color: #f4f4f4;
 }
-F
+
 header {
     background: #d32f2f; /* Red color */
     color: white;
@@ -141,8 +141,6 @@ button:hover {
     gap: 1rem;
     max-width: 600px;
     margin: auto;
-    min-height: 200px; /* Ensure the form has enough height */
-    padding: 10px; /* Add some padding for spacing */
 }
 
 #preview {
@@ -151,10 +149,4 @@ button:hover {
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
-    min-height: 100px; /* Ensure preview box is tall enough to be seen */
-}
-
-#builder-form, #preview {
-    position: relative; /* Ensure z-index works */
-    z-index: 10;
 }
