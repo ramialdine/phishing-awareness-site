@@ -134,3 +134,37 @@ button:hover {
         transform: translateY(0); 
     }
 }
+
+#email-builder {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+#builder-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#builder-form input, #builder-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#preview {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+#generated-email {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
