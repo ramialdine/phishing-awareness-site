@@ -1,1 +1,54 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Builder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Phishing Email Builder</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="quiz.html">Quiz</a>
+            <a href="builder.html">Email Builder</a>
+        </nav>
+    </header>
+    <main>
+        <section id="email-builder">
+            <h2>Build Your Own Phishing Email</h2>
+            <p>Select options to craft a phishing email and learn how they trick people.</p>
+            
+            <form id="builder-form">
+                <label for="sender">Fake Sender Name:</label>
+                <input type="text" id="sender" placeholder="e.g., Security Team" required>
+                
+                <label for="email">Fake Sender Email:</label>
+                <input type="email" id="email" placeholder="e.g., support@fake.com" required>
+                
+                <label for="subject">Subject Line:</label>
+                <select id="subject">
+                    <option value="Urgent: Account Compromised">Urgent: Account Compromised</option>
+                    <option value="Payment Failure Notification">Payment Failure Notification</option>
+                    <option value="Congratulations! You’ve Won!">Congratulations! You’ve Won!</option>
+                </select>
+                
+                <label for="content">Email Content:</label>
+                <textarea id="content" placeholder="Write the email body..."></textarea>
+                
+                <label for="link">Phishing Link:</label>
+                <input type="url" id="link" placeholder="e.g., http://fake-link.com">
+                
+                <button type="button" id="generate-btn">Generate Email</button>
+            </form>
+            
+            <div id="preview">
+                <h3>Email Preview</h3>
+                <div id="generated-email"></div>
+            </div>
+        </section>
+    </main>
+    <script src="builder.js"></script>
+</body>
+</html>
