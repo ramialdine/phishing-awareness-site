@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById("quiz-section")) {
         const examples = const examples = [
         { text: "Your account has been compromised. Please click here to reset your password.", isPhishing: true },
-        { text: "Your package has been shipped. Track it here: www.trustedshop.com.", isPhishing: false },
+        { text: "Your package has been shipped. Track it here: www.trustedshop.com. (Assuming you have recently made a purchase from this shop)", isPhishing: false },
         { text: "We've noticed suspicious activity on your account. Please verify your details immediately.", isPhishing: true },
         { text: "Welcome to our newsletter! Click here to confirm your subscription: www.newsletter.com.", isPhishing: false },
         { text: "Congratulations! You've won a free iPhone. Click here to claim your prize: www.free-iphone-giveaway.com", isPhishing: true },
