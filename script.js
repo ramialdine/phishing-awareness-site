@@ -26,11 +26,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Quiz functionality (only execute if on quiz page)
     if (document.getElementById("quiz-section")) {
-        const examples = [
-            { text: "Your account has been compromised. Please click here to reset your password.", isPhishing: true },
-            { text: "Your package has been shipped. Track it here: www.trustedshop.com.", isPhishing: false },
-            // ... Other examples here ...
-        ];
+        const examples = const examples = [
+        { text: "Your account has been compromised. Please click here to reset your password.", isPhishing: true },
+        { text: "Your package has been shipped. Track it here: www.trustedshop.com.", isPhishing: false },
+        { text: "We've noticed suspicious activity on your account. Please verify your details immediately.", isPhishing: true },
+        { text: "Welcome to our newsletter! Click here to confirm your subscription: www.newsletter.com.", isPhishing: false },
+        { text: "Congratulations! You've won a free iPhone. Click here to claim your prize: www.free-iphone-giveaway.com", isPhishing: true },
+        { text: "Your credit card payment is due. Log in to your account at www.yourbank.com to make a payment.", isPhishing: false },
+        { text: "URGENT: Your tax refund is ready. Provide your bank details here: www.irs-refund.net", isPhishing: true },
+        { text: "Your order #1234 has been processed. View your receipt at www.amazon.com/orders", isPhishing: false },
+        { text: "Security Alert: Unusual login attempt detected. Verify your identity now: www.google-security.net", isPhishing: true },
+        { text: "Your flight reservation is confirmed. Check in online at www.delta.com", isPhishing: false },
+        { text: "Your Netflix subscription has expired. Update your payment info here: www.netflix-renewal.com", isPhishing: true },
+        { text: "Thank you for your purchase. Leave a review for a 10% discount on your next order at www.etsy.com", isPhishing: false },
+        { text: "Your social security number has been suspended due to suspicious activity. Call this number immediately: 1-800-555-1234", isPhishing: true },
+        { text: "Your password will expire in 3 days. Change it now at portal.yourcompany.com", isPhishing: false },
+        { text: "You have (1) new voicemail. Listen now: www.voicemail-service.net", isPhishing: true }
+    ];
 
         let score = 0;
         const totalQuestions = examples.length;
