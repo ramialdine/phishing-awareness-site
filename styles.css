@@ -16,27 +16,36 @@ header {
 }
 
 header h1 {
-    margin: 0;
-    font-size: 2.5em;
-    font-weight: 300;
-    letter-spacing: 1px;
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    color: #2c3e50;
+    text-shadow: 2px 2px #ecf0f1;
+    text-align: center;
+    margin: 20px 0;
 }
 
-nav {
-    margin-top: 10px;
+/* Nav bar styling */
+header nav {
+    display: flex;
+    justify-content: center;
+    background-color: #34495e;
+    padding: 10px;
+    border-radius: 5px;
 }
 
-nav a {
-    color: white;
+header nav a {
+    font-family: 'Arial', sans-serif;
+    color: #ecf0f1;
     text-decoration: none;
-    margin: 0 15px;
-    font-size: 1.1em;
-    transition: all 0.3s ease;
+    padding: 10px 20px;
+    margin: 0 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-nav a:hover {
-    text-decoration: none;
-    color: #ffcccb;
+header nav a:hover {
+    background-color: #ecf0f1;
+    color: #34495e;
+    border-radius: 5px;
 }
 
 main {
